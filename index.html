@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RobBob - Новости и лаунчер</title>
+    <meta name="description" content="Новостной портал о RobBob Launcher - современном игровом лаунчере">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="dark">
+    <!-- Background (can be image or video) -->
+    <div class="background"></div>
+    <div class="bg-gradient"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="glass-panel header">
+            <div class="logo">
+                <img src="img/icon.png" alt="RobBob" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.previousElementSibling = this.parentElement.querySelector('.logo-icon-fallback'); this.parentElement.querySelector('.logo-icon-fallback').style.display='block';">
+                <div class="logo-icon logo-icon-fallback" style="display:none;"></div>
+                <span class="logo-text">ROBBOB</span>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-page="news">Новости</button>
+                <button class="nav-btn" data-page="home">Лаунчер</button>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" title="Переключить тему">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- News Page (now first) -->
+            <div class="page active" id="news">
+                <div class="news-container">
+                    <h2 class="page-title">Новости и обновления</h2>
+                    
+                    <!-- Recommended Games Section -->
+                    <div class="recommended-games" id="recommendedGames" style="display: none;">
+                        <h3 class="section-subtitle">Рекомендуемые режимы</h3>
+                        <div class="games-grid" id="gamesGrid">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                    
+                    <div class="news-list">
+                        <article class="news-item glass-panel">
+                            <div class="news-header">
+                                <span class="news-badge new">Новое</span>
+                                <time class="news-date">15 декабря 2025</time>
+                            </div>
+                            <h3 class="news-title">Релиз версии 1.0.0</h3>
+                            <p class="news-desc">
+                                Первая стабильная версия RobBob Launcher. Включает все основные функции: 
+                                быстрый запуск игр, автоматические обновления, современный интерфейс с темной и светлой темами.
+                            </p>
+                            <div class="news-tags">
+                                <span class="tag">Релиз</span>
+                                <span class="tag">Стабильная версия</span>
+                            </div>
+                        </article>
+
+                        <article class="news-item glass-panel">
+                            <div class="news-header">
+                                <time class="news-date">10 декабря 2025</time>
+                            </div>
+                            <h3 class="news-title">Бета-тестирование завершено</h3>
+                            <p class="news-desc">
+                                Благодарим всех участников бета-тестирования! Ваши отзывы помогли улучшить лаунчер 
+                                и исправить критические ошибки перед релизом.
+                            </p>
+                            <div class="news-tags">
+                                <span class="tag">Бета</span>
+                            </div>
+                        </article>
+
+                        <article class="news-item glass-panel">
+                            <div class="news-header">
+                                <time class="news-date">5 декабря 2025</time>
+                            </div>
+                            <h3 class="news-title">Анонс RobBob Launcher</h3>
+                            <p class="news-desc">
+                                Представляем новый игровой лаунчер с фокусом на производительность и удобство. 
+                                Скоро выйдет первая публичная версия.
+                            </p>
+                            <div class="news-tags">
+                                <span class="tag">Анонс</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Launcher Page (now second) -->
+            <div class="page" id="home">
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            <span class="gradient-text">ROBBOB</span>
+                            <span class="subtitle">LAUNCHER</span>
+                        </h1>
+                        <p class="hero-desc">Игровой лаунчер с фокусом на стабильность соединения и удобство использования</p>
+                        
+                        <div class="download-section">
+                            <a href="downloads/RobBobLauncher-Setup.exe" class="download-btn" id="downloadBtn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                <span>Скачать лаунчер</span>
+                            </a>
+                            <div class="version-info">
+                                <span class="version-badge">v1.0.0</span>
+                                <span class="size-info">~45 MB</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="features-grid">
+                            <div class="feature-card glass-panel">
+                                <div class="feature-icon">🌐</div>
+                                <h3>Оптимизированный сетевой режим</h3>
+                                <p>Более плавное подключение к серверам и стабильная игра</p>
+                            </div>
+                            <div class="feature-card glass-panel">
+                                <div class="feature-icon">📦</div>
+                                <h3>Автоматические обновления</h3>
+                                <p>Всегда актуальная версия без ручных загрузок</p>
+                            </div>
+                            <div class="feature-card glass-panel">
+                                <div class="feature-icon">🧭</div>
+                                <h3>Центр управления Roblox</h3>
+                                <p>Запуск, настройки и новости в одном месте</p>
+                            </div>
+                            <div class="feature-card glass-panel">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Лёгкий и быстрый</h3>
+                                <p>Минимальная нагрузка на систему и быстрый старт</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-panel footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="footer-text">© 2025 RobBob Launcher</span>
+            </div>
+            <div class="footer-right">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Все системы работают</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon">✓</span>
+            <span class="toast-text">Загрузка началась!</span>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

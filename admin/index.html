@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | RobBob Launcher</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-gradient"></div>
+    
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container glass-panel">
+            <div class="login-header">
+                <img src="../img/icon.png" alt="RobBob" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="logo-icon" style="display:none;"></div>
+                <h1>Админ-панель</h1>
+                <p>Введите логин и пароль для входа</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="usernameInput" placeholder="Логин" autocomplete="username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="passwordInput" placeholder="Пароль" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="login-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    Войти
+                </button>
+                <div class="login-error" id="loginError">Неверный логин или пароль</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel" style="display: none;">
+        <div class="container">
+            <!-- Admin Header -->
+            <header class="glass-panel header admin-header">
+                <div class="logo">
+                    <img src="../img/icon.png" alt="RobBob" class="logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-icon" style="display:none;"></div>
+                    <span class="logo-text">АДМИН</span>
+                </div>
+                <nav class="admin-nav">
+                    <button class="nav-btn active" data-section="news">Новости</button>
+                    <button class="nav-btn" data-section="games">Рекомендации</button>
+                    <button class="nav-btn" data-section="settings">Настройки</button>
+                </nav>
+                <div class="admin-actions">
+                    <button class="btn-icon" id="logoutBtn" title="Выйти">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Admin Content -->
+            <main class="admin-content">
+                <!-- News Section -->
+                <section class="admin-section active" id="newsSection">
+                    <div class="section-header">
+                        <h2>Управление новостями</h2>
+                        <button class="btn primary" id="addNewsBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Добавить новость
+                        </button>
+                    </div>
+                    <div class="news-list-admin" id="newsListAdmin">
+                        <!-- News items will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Games Section -->
+                <section class="admin-section" id="gamesSection">
+                    <div class="section-header">
+                        <h2>Рекомендуемые игры Roblox</h2>
+                    </div>
+                    <div class="games-manager">
+                        <div class="game-input-section glass-panel">
+                            <h3>Добавить игру</h3>
+                            <p class="setting-desc">Вставьте ссылку на игру из Roblox и добавьте комментарий</p>
+                            <div class="form-group">
+                                <label>Ссылка на игру</label>
+                                <input type="url" id="gameUrlInput" placeholder="https://www.roblox.com/games/..." class="game-url-input">
+                            </div>
+                            <div class="form-group">
+                                <label>Комментарий от админа</label>
+                                <textarea id="gameDescInput" placeholder="Напишите краткое описание или рекомендацию..." rows="2" class="game-desc-input"></textarea>
+                            </div>
+                            <div class="game-input-actions">
+                                <button class="btn primary" id="addGameBtn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Добавить
+                                </button>
+                            </div>
+                            <div class="game-error" id="gameError"></div>
+                        </div>
+                        <div class="games-list-section">
+                            <h3>Текущие игры</h3>
+                            <div class="games-grid-admin" id="gamesGridAdmin">
+                                <!-- Games will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section class="admin-section" id="settingsSection">
+                    <div class="section-header">
+                        <h2>Настройки сайта</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-card glass-panel">
+                            <h3>Информация о версии</h3>
+                            <div class="setting-row">
+                                <label>Версия лаунчера</label>
+                                <input type="text" id="versionInput" placeholder="v1.0.0">
+                            </div>
+                            <div class="setting-row">
+                                <label>Размер файла</label>
+                                <input type="text" id="sizeInput" placeholder="~45 MB">
+                            </div>
+                            <div class="setting-row">
+                                <label>Ссылка для скачивания</label>
+                                <input type="text" id="downloadUrlInput" placeholder="downloads/RobBobLauncher-Setup.exe">
+                            </div>
+                            <button class="btn primary" id="saveSettingsBtn">Сохранить настройки</button>
+                        </div>
+                        <div class="setting-card glass-panel">
+                            <h3>Экспорт данных</h3>
+                            <p class="setting-desc">Скачайте все данные для резервного копирования</p>
+                            <button class="btn ghost" id="exportDataBtn">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Экспорт JSON
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- News Modal -->
+    <div class="modal" id="newsModal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2 id="modalTitle">Добавить новость</h2>
+                <button class="btn-icon close-modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="newsForm">
+                <input type="hidden" id="newsId">
+                <div class="form-group">
+                    <label>Заголовок</label>
+                    <input type="text" id="newsTitle" required placeholder="Заголовок новости">
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="newsDesc" required placeholder="Описание новости..." rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Теги (через запятую)</label>
+                    <input type="text" id="newsTags" placeholder="Релиз, Обновление">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="newsIsNew">
+                        Пометить как "Новое"
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn ghost close-modal">Отмена</button>
+                    <button type="submit" class="btn primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content glass-panel modal-small">
+            <div class="modal-header">
+                <h2>Подтверждение</h2>
+            </div>
+            <p class="modal-text">Вы уверены, что хотите удалить эту новость?</p>
+            <div class="modal-actions">
+                <button class="btn ghost close-modal">Отмена</button>
+                <button class="btn danger" id="confirmDeleteBtn">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon" id="toastIcon">✓</span>
+            <span class="toast-text" id="toastText">Сохранено!</span>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
