@@ -56,6 +56,7 @@
                 </div>
                 <nav class="admin-nav">
                     <button class="nav-btn active" data-section="news">Новости</button>
+                    <button class="nav-btn" data-section="launcher">Лаунчер</button>
                     <button class="nav-btn" data-section="games">Рекомендации</button>
                     <button class="nav-btn" data-section="settings">Настройки</button>
                 </nav>
@@ -86,6 +87,46 @@
                     </div>
                     <div class="news-list-admin" id="newsListAdmin">
                         <!-- News items will be rendered here -->
+                    </div>
+                </section>
+
+                <!-- Launcher News Section -->
+                <section class="admin-section" id="launcherSection">
+                    <div class="section-header">
+                        <h2>Новости лаунчера</h2>
+                        <button class="btn primary" id="addLauncherNewsBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Добавить новость
+                        </button>
+                    </div>
+                    
+                    <!-- API Configuration -->
+                    <div class="launcher-api-config glass-panel">
+                        <h3>⚙️ Настройка API</h3>
+                        <p class="setting-desc">Укажите адрес вашего API сервера и ключ доступа</p>
+                        <div class="api-config-row">
+                            <div class="form-group">
+                                <label>URL API сервера</label>
+                                <input type="url" id="launcherApiUrl" placeholder="https://api.your-domain.com">
+                            </div>
+                            <div class="form-group">
+                                <label>API ключ</label>
+                                <input type="password" id="launcherApiKey" placeholder="Ваш секретный ключ">
+                            </div>
+                            <button class="btn primary" id="saveLauncherApiBtn">Сохранить и проверить</button>
+                        </div>
+                        <div class="api-status" id="apiStatus"></div>
+                    </div>
+                    
+                    <!-- Launcher News List -->
+                    <div class="launcher-news-list" id="launcherNewsList">
+                        <div class="launcher-news-loading">
+                            <div class="loading-spinner"></div>
+                            <span>Загрузка новостей...</span>
+                        </div>
                     </div>
                 </section>
 
@@ -216,6 +257,81 @@
             <div class="modal-actions">
                 <button class="btn ghost close-modal">Отмена</button>
                 <button class="btn danger" id="confirmDeleteBtn">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Launcher News Modal -->
+    <div class="modal" id="launcherNewsModal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h2 id="launcherModalTitle">Добавить новость в лаунчер</h2>
+                <button class="btn-icon close-modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <form id="launcherNewsForm">
+                <input type="hidden" id="launcherNewsId">
+                <div class="form-group">
+                    <label>Заголовок</label>
+                    <input type="text" id="launcherNewsTitle" required placeholder="Заголовок новости">
+                </div>
+                <div class="form-group">
+                    <label>Содержание</label>
+                    <textarea id="launcherNewsContent" required placeholder="Текст новости..." rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Иконка (emoji)</label>
+                    <select id="launcherNewsEmoji">
+                        <option value="rocket">🚀 Релиз</option>
+                        <option value="shield">🛡️ Безопасность</option>
+                        <option value="zap">⚡ Скорость</option>
+                        <option value="star">⭐ Важное</option>
+                        <option value="fire">🔥 Горячее</option>
+                        <option value="gift">🎁 Подарок</option>
+                        <option value="warning">⚠️ Внимание</option>
+                        <option value="info">ℹ️ Информация</option>
+                        <option value="check">✅ Готово</option>
+                        <option value="new">🆕 Новое</option>
+                        <option value="update">📦 Обновление</option>
+                        <option value="bug">🐛 Баг</option>
+                        <option value="fix">🔧 Исправление</option>
+                        <option value="sparkles">✨ Улучшение</option>
+                        <option value="game">🎮 Игры</option>
+                        <option value="network">🌐 Сеть</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ссылка (необязательно)</label>
+                    <input type="url" id="launcherNewsLink" placeholder="https://example.com">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="launcherNewsPinned">
+                        Закрепить новость
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn ghost close-modal">Отмена</button>
+                    <button type="submit" class="btn primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Launcher Delete Confirmation Modal -->
+    <div class="modal" id="launcherDeleteModal">
+        <div class="modal-content glass-panel modal-small">
+            <div class="modal-header">
+                <h2>Подтверждение</h2>
+            </div>
+            <p class="modal-text">Вы уверены, что хотите удалить эту новость из лаунчера?</p>
+            <div class="modal-actions">
+                <button class="btn ghost close-modal">Отмена</button>
+                <button class="btn danger" id="confirmLauncherDeleteBtn">Удалить</button>
             </div>
         </div>
     </div>
